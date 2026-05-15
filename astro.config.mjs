@@ -11,6 +11,9 @@ export default defineConfig({
 			description:
 				'Documentation for grāmatr — real-time intelligent context engineering. MCP integration, API reference, governance, and operations.',
 			social: [
+				{ icon: 'seti:html', label: 'gramatr.com', href: 'https://gramatr.com' },
+				{ icon: 'seti:notebook', label: 'Blog', href: 'https://gramatr.com/blog' },
+				{ icon: 'rocket', label: 'Request access', href: 'https://gramatr.com/pricing' },
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/gramatr' },
 			],
 			editLink: {
@@ -20,6 +23,20 @@ export default defineConfig({
 				{
 					tag: 'meta',
 					attrs: { name: 'theme-color', content: '#3B82F6' },
+				},
+				// Default to dark theme on first visit (Starlight stores the user's
+				// explicit choice in localStorage; we only set the default when no
+				// preference has been recorded yet).
+				{
+					tag: 'script',
+					content: `(function() {
+						try {
+							var stored = localStorage.getItem('starlight-theme');
+							if (!stored) {
+								document.documentElement.dataset.theme = 'dark';
+							}
+						} catch (e) {}
+					})();`,
 				},
 			],
 			customCss: ['./src/styles/brand.css'],

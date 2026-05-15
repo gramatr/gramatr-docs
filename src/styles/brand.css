@@ -3,33 +3,51 @@
    Eventually these should live in a shared package; for now they're
    duplicated by design (Starlight is in its own repo). */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap');
+
 :root {
 	/* Override Starlight's accent palette with grāmatr primary (#3B82F6) */
 	--sl-color-accent-low: #1f3460;
 	--sl-color-accent: #3b82f6;
 	--sl-color-accent-high: #93c5fd;
 
-	/* Wordmark face (Outfit) loaded the same way the marketing site does it.
-	   We pull the same Google Fonts subset here so the wordmark and headings
-	   feel native to both surfaces. */
+	/* Inter as body text — matches the marketing site */
+	--sl-font: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 	--gmtr-wordmark: 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* Use Inter as body font, Outfit for the site title and h1/h2.
-   Starlight's defaults are fine for everything else. */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap');
-
-:root {
-	--sl-font: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+/* Dark mode — tightened to match the marketing site's surface palette
+   instead of Starlight's defaults. Keep Starlight's hue (cool gray) but
+   nudge the neutrals to match gramatr.com's slightly cooler surfaces. */
+:root[data-theme='dark'] {
+	--sl-color-bg: #0a0d12;
+	--sl-color-bg-nav: #0a0d12;
+	--sl-color-bg-sidebar: #0a0d12;
+	--sl-color-bg-inline-code: rgba(59, 130, 246, 0.08);
+	--sl-color-hairline: rgba(255, 255, 255, 0.08);
+	--sl-color-hairline-light: rgba(255, 255, 255, 0.05);
+	--sl-color-hairline-shade: rgba(255, 255, 255, 0.04);
 }
 
-.site-title, h1, h2 {
+/* Wordmark treatment on the site title in the header. Outfit, tighter
+   letter-spacing matches the marketing nav. The "docs" suffix renders
+   in a lighter weight so the grāmatr wordmark is the visual anchor. */
+.site-title {
 	font-family: var(--gmtr-wordmark);
+	font-weight: 600;
+	letter-spacing: -0.02em;
+	font-size: 1.15rem;
 }
 
-/* Inline brand mention — same .brand class the marketing site uses to render
-   grāmatr in Outfit instead of Inter. Lets prose containing "grāmatr" match
-   the wordmark treatment without changing size or weight. */
+/* Headings use Outfit for consistency with marketing-site h1/h2 styling */
+h1, h2 {
+	font-family: var(--gmtr-wordmark);
+	letter-spacing: -0.015em;
+}
+
+/* Inline brand mention — same .brand class the marketing site uses to
+   render grāmatr in Outfit instead of Inter. Inherits surrounding size,
+   weight, color, and line-height so it doesn't disrupt body flow. */
 .brand {
 	font-family: var(--gmtr-wordmark);
 	font-size: inherit;
