@@ -1,48 +1,80 @@
-/* grāmatr brand tokens — kept in sync with src/styles/global.css on
-   gramatr-ai-website. If those tokens change there, update here too.
-   Eventually these should live in a shared package; for now they're
-   duplicated by design (Starlight is in its own repo). */
+/* grāmatr brand tokens — derived from the canonical "Gray Matter" palette
+   locked 2026-03-28 in /Plans/design-tokens.json on gramatr-ai-website.
+   Rationale (preserved verbatim from the source):
+     "Warm neutrals differentiate from every competitor. The name is gray
+      matter — the palette IS the brand. Blue accent provides energy for
+      CTAs."
+   Blue is an accent, never a dominant surface. The page should read as
+   charcoal-on-gray with blue reserved for active states, links, and CTAs. */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap');
 
 :root {
-	/* Override Starlight's accent palette with grāmatr primary (#3B82F6) */
-	--sl-color-accent-low: #1f3460;
-	--sl-color-accent: #3b82f6;
-	--sl-color-accent-high: #93c5fd;
-
-	/* Inter as body text — matches the marketing site */
+	/* Wordmark face (Outfit) + body face (Inter) — match the marketing site */
 	--sl-font: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 	--gmtr-wordmark: 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+	/* Canonical Gray Matter palette */
+	--gmtr-bg: #111111;
+	--gmtr-surface: #1A1A1A;
+	--gmtr-surface-hover: #252525;
+	--gmtr-surface-active: #2E2E2E;
+	--gmtr-border: #333333;
+	--gmtr-border-hover: #444444;
+	--gmtr-text: #ECECEC;
+	--gmtr-text-secondary: #888888;
+	--gmtr-text-muted: #666666;
+	--gmtr-primary: #3B82F6;
+	--gmtr-primary-hover: #2563EB;
+	--gmtr-accent: #60A5FA;
+
+	/* Starlight accent palette → only used for links + active sidebar items.
+	   The accent-low feeds the focus rings; keep it deeply muted so it
+	   doesn't bleed into surface backgrounds. */
+	--sl-color-accent-low: #1E3A8A;
+	--sl-color-accent: var(--gmtr-primary);
+	--sl-color-accent-high: var(--gmtr-accent);
 }
 
-/* Dark mode — tightened to match the marketing site's surface palette
-   instead of Starlight's defaults. Keep Starlight's hue (cool gray) but
-   nudge the neutrals to match gramatr.com's slightly cooler surfaces. */
+/* Dark mode is the brand. Override every Starlight gray to Gray Matter. */
 :root[data-theme='dark'] {
-	--sl-color-bg: #0a0d12;
-	--sl-color-bg-nav: #0a0d12;
-	--sl-color-bg-sidebar: #0a0d12;
-	--sl-color-bg-inline-code: rgba(59, 130, 246, 0.08);
-	--sl-color-hairline: rgba(255, 255, 255, 0.08);
-	--sl-color-hairline-light: rgba(255, 255, 255, 0.05);
-	--sl-color-hairline-shade: rgba(255, 255, 255, 0.04);
+	--sl-color-bg: var(--gmtr-bg);
+	--sl-color-bg-nav: var(--gmtr-bg);
+	--sl-color-bg-sidebar: var(--gmtr-bg);
+	--sl-color-bg-inline-code: var(--gmtr-surface-hover);
+	--sl-color-text: var(--gmtr-text);
+	--sl-color-text-accent: var(--gmtr-text);
+	--sl-color-white: var(--gmtr-text);
+	--sl-color-gray-1: #ECECEC;
+	--sl-color-gray-2: #C8C8C8;
+	--sl-color-gray-3: #888888;
+	--sl-color-gray-4: #666666;
+	--sl-color-gray-5: #444444;
+	--sl-color-gray-6: var(--gmtr-surface);
+	--sl-color-gray-7: var(--gmtr-bg);
+	--sl-color-black: var(--gmtr-bg);
+	--sl-color-hairline: var(--gmtr-border);
+	--sl-color-hairline-light: var(--gmtr-surface);
+	--sl-color-hairline-shade: var(--gmtr-surface);
 }
 
-/* Wordmark treatment on the site title in the header. Outfit, tighter
-   letter-spacing matches the marketing nav. The "docs" suffix renders
-   in a lighter weight so the grāmatr wordmark is the visual anchor. */
+/* Wordmark treatment on the site title in the header. Outfit, tight
+   tracking — matches the marketing nav. Stays neutral text color so it
+   doesn't compete with the blue CTA palette elsewhere. */
 .site-title {
 	font-family: var(--gmtr-wordmark);
 	font-weight: 600;
 	letter-spacing: -0.02em;
 	font-size: 1.15rem;
+	color: var(--gmtr-text);
 }
 
-/* Headings use Outfit for consistency with marketing-site h1/h2 styling */
-h1, h2 {
+/* Headings use Outfit. Neutral color — NOT blue. Blue is reserved for
+   links, active sidebar items, and CTAs. */
+h1, h2, h3 {
 	font-family: var(--gmtr-wordmark);
 	letter-spacing: -0.015em;
+	color: var(--gmtr-text);
 }
 
 /* Inline brand mention — same .brand class the marketing site uses to
@@ -54,4 +86,12 @@ h1, h2 {
 	font-weight: inherit;
 	line-height: inherit;
 	vertical-align: baseline;
+}
+
+/* Links in prose — blue accent, but use the marketing-site hover tone */
+a[href]:not([class]) {
+	color: var(--gmtr-primary);
+}
+a[href]:not([class]):hover {
+	color: var(--gmtr-primary-hover);
 }
