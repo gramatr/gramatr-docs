@@ -1,0 +1,39 @@
+/* grāmatr brand tokens — kept in sync with src/styles/global.css on
+   gramatr-ai-website. If those tokens change there, update here too.
+   Eventually these should live in a shared package; for now they're
+   duplicated by design (Starlight is in its own repo). */
+
+:root {
+	/* Override Starlight's accent palette with grāmatr primary (#3B82F6) */
+	--sl-color-accent-low: #1f3460;
+	--sl-color-accent: #3b82f6;
+	--sl-color-accent-high: #93c5fd;
+
+	/* Wordmark face (Outfit) loaded the same way the marketing site does it.
+	   We pull the same Google Fonts subset here so the wordmark and headings
+	   feel native to both surfaces. */
+	--gmtr-wordmark: 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Use Inter as body font, Outfit for the site title and h1/h2.
+   Starlight's defaults are fine for everything else. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap');
+
+:root {
+	--sl-font: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.site-title, h1, h2 {
+	font-family: var(--gmtr-wordmark);
+}
+
+/* Inline brand mention — same .brand class the marketing site uses to render
+   grāmatr in Outfit instead of Inter. Lets prose containing "grāmatr" match
+   the wordmark treatment without changing size or weight. */
+.brand {
+	font-family: var(--gmtr-wordmark);
+	font-size: inherit;
+	font-weight: inherit;
+	line-height: inherit;
+	vertical-align: baseline;
+}
