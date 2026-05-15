@@ -36,7 +36,8 @@
 	--sl-color-accent-high: var(--gmtr-accent);
 }
 
-/* Dark mode is the brand. Override every Starlight gray to Gray Matter. */
+/* Dark mode is the brand default. Override every Starlight gray to
+   Gray Matter charcoals. */
 :root[data-theme='dark'] {
 	--sl-color-bg: var(--gmtr-bg);
 	--sl-color-bg-nav: var(--gmtr-bg);
@@ -58,23 +59,49 @@
 	--sl-color-hairline-shade: var(--gmtr-surface);
 }
 
+/* Light mode — Gray Matter inverted. The marketing site is dark-only,
+   so there's no canonical light palette to clone. This one mirrors
+   the dark tokens with high-contrast text (#111 on #FFF) so readers
+   who explicitly toggle to light still get a brand-coherent look.
+   Primary blue stays the same (it has enough contrast on white). */
+:root:not([data-theme='dark']) {
+	--sl-color-bg: #FFFFFF;
+	--sl-color-bg-nav: #FFFFFF;
+	--sl-color-bg-sidebar: #FAFAFA;
+	--sl-color-bg-inline-code: #F0F0F0;
+	--sl-color-text: #111111;
+	--sl-color-text-accent: #111111;
+	--sl-color-white: #111111;
+	--sl-color-gray-1: #111111;
+	--sl-color-gray-2: #333333;
+	--sl-color-gray-3: #555555;
+	--sl-color-gray-4: #777777;
+	--sl-color-gray-5: #999999;
+	--sl-color-gray-6: #E5E5E5;
+	--sl-color-gray-7: #F5F5F5;
+	--sl-color-black: #FFFFFF;
+	--sl-color-hairline: #E5E5E5;
+	--sl-color-hairline-light: #F0F0F0;
+	--sl-color-hairline-shade: #F5F5F5;
+}
+
 /* Wordmark treatment on the site title in the header. Outfit, tight
-   tracking — matches the marketing nav. Stays neutral text color so it
-   doesn't compete with the blue CTA palette elsewhere. */
+   tracking — matches the marketing nav. Color follows the theme via
+   --sl-color-text so it stays readable in light AND dark mode. */
 .site-title {
 	font-family: var(--gmtr-wordmark);
 	font-weight: 600;
 	letter-spacing: -0.02em;
 	font-size: 1.15rem;
-	color: var(--gmtr-text);
+	color: var(--sl-color-text);
 }
 
-/* Headings use Outfit. Neutral color — NOT blue. Blue is reserved for
-   links, active sidebar items, and CTAs. */
+/* Headings use Outfit. Neutral color (follows theme) — NOT blue. Blue
+   is reserved for links, active sidebar items, and CTAs. */
 h1, h2, h3 {
 	font-family: var(--gmtr-wordmark);
 	letter-spacing: -0.015em;
-	color: var(--gmtr-text);
+	color: var(--sl-color-text);
 }
 
 /* Inline brand mention — same .brand class the marketing site uses to

@@ -24,17 +24,18 @@ export default defineConfig({
 					tag: 'meta',
 					attrs: { name: 'theme-color', content: '#3B82F6' },
 				},
-				// Default to dark theme on first visit (Starlight stores the user's
-				// explicit choice in localStorage; we only set the default when no
-				// preference has been recorded yet).
+				// Default to dark theme on first visit. Writes to localStorage
+				// BEFORE Starlight's ThemeProvider runs so its OS-preference check
+				// doesn't override us. Users can still toggle via the picker; the
+				// next visit honors their choice.
 				{
 					tag: 'script',
 					content: `(function() {
 						try {
-							var stored = localStorage.getItem('starlight-theme');
-							if (!stored) {
-								document.documentElement.dataset.theme = 'dark';
+							if (!localStorage.getItem('starlight-theme')) {
+								localStorage.setItem('starlight-theme', 'dark');
 							}
+							document.documentElement.dataset.theme = localStorage.getItem('starlight-theme');
 						} catch (e) {}
 					})();`,
 				},
